@@ -9,7 +9,7 @@ SOURCE="https://github.com/acassen/keepalived/archive/master.zip"
 cp -v /config/keepalived-centos7.specs /root/keepalived-build.specs
 
 # Get source 
-/usr/bin/wget $SOURCE -O 
+/usr/bin/wget $SOURCE -O \
               /root/rpmbuild/SOURCES/master.zip
 
 # Change release number
