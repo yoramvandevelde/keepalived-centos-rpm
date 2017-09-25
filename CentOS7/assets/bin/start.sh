@@ -23,8 +23,5 @@ BUILDVERSION=$(cat /config/buildversion)
 # Move them to mount /data
 mv -v /root/rpmbuild/RPMS/x86_64/* /data/
 
-# Install the generated RPM
-yum install /data/keepalived-$DISTVERSION-$BUILDVERSION.rpm
-
 # Clean up
-#rm -v /root/keepalived-build.specs
+rm -v /root/keepalived-build.specs
