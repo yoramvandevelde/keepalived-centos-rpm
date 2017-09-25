@@ -1,0 +1,76 @@
+Name:           keepalived
+Version:        DISTVERSION
+Release:        BUILDVERSION%{?dist}
+Summary:        Loadbalancing & High-Availability
+
+Group:          Application/Network
+License:        GPLv2
+URL:            https://github.com/acassen/keepalived
+Source0:        master.zip
+
+BuildRoot:      /root/rpmbuild/BUILD/keepalived-DISTVERSION
+BuildRequires:  curl 
+BuildRequires:  gcc 
+BuildRequires:  openssl-devel 
+BuildRequires:  libnl3-devel 
+BuildRequires:  net-snmp-devel
+BuildRequires:  libnfnetlink-devel
+
+%description 
+The main goal of the keepalived project is to add a strong & robust keepalive facility to the Linux Virtual Server project. It implements a multilayer TCP/IP stack checks. Keepalived implements a framework based on three family checks : Layer3, Layer4 & Layer5. This framework gives the daemon the ability of checking a LVS server pool states. Keepalived can be sumarize as a LVS driving daemon.
+
+Keepalived implementation is based on an I/O multiplexer to handle a strong multi-threading framework. All the events process use this I/O multiplexer.
+
+%prep
+
+%setup -n %{name}-master
+
+%build
+CFLAGS="$RPM_OPT_FLAGS" ./configure --sysconfdir=/etc --prefix=/usr/ --enable-snmp --enable-snmp-vrrp --enable-sha1 --with-init=SYSV
+make %{?_smp_mflags}
+
+%install
+%make_install
+
+%files
+%defattr(-,root,root)
+/etc/rc.d/init.d/keepalived
+/etc/sysconfig/keepalived
+/etc/keepalived/keepalived.conf
+/etc/keepalived/samples/client.pem
+/etc/keepalived/samples/dh1024.pem
+/etc/keepalived/samples/keepalived.conf.HTTP_GET.port
+/etc/keepalived/samples/keepalived.conf.IPv6
+/etc/keepalived/samples/keepalived.conf.SMTP_CHECK
+/etc/keepalived/samples/keepalived.conf.SSL_GET
+/etc/keepalived/samples/keepalived.conf.fwmark
+/etc/keepalived/samples/keepalived.conf.inhibit
+/etc/keepalived/samples/keepalived.conf.misc_check
+/etc/keepalived/samples/keepalived.conf.misc_check_arg
+/etc/keepalived/samples/keepalived.conf.quorum
+/etc/keepalived/samples/keepalived.conf.sample
+/etc/keepalived/samples/keepalived.conf.status_code
+/etc/keepalived/samples/keepalived.conf.track_interface
+/etc/keepalived/samples/keepalived.conf.virtual_server_group
+/etc/keepalived/samples/keepalived.conf.virtualhost
+/etc/keepalived/samples/keepalived.conf.vrrp
+/etc/keepalived/samples/keepalived.conf.vrrp.localcheck
+/etc/keepalived/samples/keepalived.conf.vrrp.lvs_syncd
+/etc/keepalived/samples/keepalived.conf.vrrp.routes
+/etc/keepalived/samples/keepalived.conf.vrrp.rules
+/etc/keepalived/samples/keepalived.conf.vrrp.scripts
+/etc/keepalived/samples/keepalived.conf.vrrp.static_ipaddress
+/etc/keepalived/samples/keepalived.conf.vrrp.sync
+/etc/keepalived/samples/root.pem
+/etc/keepalived/samples/sample.misccheck.smbcheck.sh
+/etc/keepalived/samples/sample_notify_fifo.sh
+/usr/bin/genhash
+/usr/sbin/keepalived
+/usr/share/doc/keepalived/README
+/usr/share/man/man1/genhash.1.gz
+/usr/share/man/man5/keepalived.conf.5.gz
+/usr/share/man/man8/keepalived.8.gz
+/usr/share/snmp/mibs/KEEPALIVED-MIB.txt
+
+%changelog
+
