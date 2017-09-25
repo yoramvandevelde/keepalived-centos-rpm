@@ -6,11 +6,11 @@ set -e
 DISTVERSION=$(curl -s https://api.github.com/repos/acassen/keepalived/tags | grep "name" | head -n 1 | cut -d'"' -f4)
 SOURCE="https://github.com/acassen/keepalived/archive/master.zip"
 
-cp -v /config/keepalived-centos7.specs /root/keepalived-build.specs
+cp -v /config/keepalived-centos6.specs /root/keepalived-build.specs
 
 # Get source 
 /usr/bin/wget $SOURCE -O \
-              /root/rpmbuild/SOURCES/$DISTVERSION.zip
+              /root/rpmbuild/SOURCES/master.zip
 
 # Change release number
 BUILDVERSION=$(cat /config/buildversion)
