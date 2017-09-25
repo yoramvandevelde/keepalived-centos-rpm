@@ -1,4 +1,7 @@
-# keepalived for CentOS7 RPM builder
+# keepalived CentOS RPM builder
+
+[![Build Status](https://travis-ci.org/yoramvandevelde/keepalived-centos-rpm.svg?branch=master)](https://travis-ci.org/yoramvandevelde/keepalived-centos-rpm)
+
 ---
 Build and run it:
 ```
