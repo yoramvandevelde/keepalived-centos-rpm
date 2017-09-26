@@ -4,10 +4,11 @@ python:
     - 2.7
 services:
     - docker
+env:
+  matrix:
+  - OS="CentOS6"
+  - OS="CentOS7"
 install:
-    - docker build -t keepalived-centos6-rpm-builder:latest CentOS6
-    - docker build -t keepalived-centos7-rpm-builder:latest CentOS7
+    - docker build -t keepalived-${OS,,}-rpm-builder:latest ${OS}
 script:
-    - docker run -ti --rm -v $PWD/CentOS6/data:/data -v $PWD/CentOS6/assets/config:/config keepalived-centos6-rpm-builder start.sh
-    - docker run -ti --rm -v $PWD/CentOS7/data:/data -v $PWD/CentOS7/assets/config:/config keepalived-centos7-rpm-builder start.sh
-
+    - docker run -ti --rm -v $PWD/${OS}/data:/data -v $PWD/${OS}/assets/config:/config keepalived-${OS,,}-rpm-builder start.sh
