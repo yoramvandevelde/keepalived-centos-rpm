@@ -20,6 +20,6 @@ addons:
 deploy:
     provider: script
     skip_cleanup: true
-    script: rsync -r --delete-after --quiet ${OS,,}/data/ travis@packages.savvii.services:${OS}/
+    script: rsync -avzr -e 'ssh -i ./deploy_rsa' --delete-after --quiet ${OS,,}/data/ travis@packages.savvii.services:${OS}/
     on:
         branch: master
